@@ -1,0 +1,19 @@
+-crear el namespace
+kubectl create namespace squidgame
+-crear los deployments de cada imagen
+kubectl create deployment pubsubworker --image=andreapalomo/pubsubkorker -n squidgame
+kubectl autoscale deployment pubsubworker --cpu-percent=50 --min=1 --max=10 -n squidgame
+---------------------------------------------------------------------------------------------------------------
+kubectl create deployment pub --image=andreapalomo/pub -n squidgame
+kubectl autoscale deployment pub --cpu-percent=50 --min=1 --max=10 -n squidgame
+---------------------------------------------------------------------------------------------------------------
+kubectl create deployment sub --image=andreapalomo/sub -n squidgame
+kubectl autoscale deployment sub --cpu-percent=50 --min=1 --max=10 -n squidgame
+---------------------------------------------------------------------------------------------------------------
+-crear los servicios de cada deployment
+kubectl expose deployment pubsubworker --port=80 --target-port=4444 --type=LoadBalancer -n squidgame
+---------------------------------------------------------------------------------------------------------------
+kubectl expose deployment pub --port=80 --target-port=3333 --type=LoadBalancer -n squidgame
+---------------------------------------------------------------------------------------------------------------
+kubectl expose deployment sub --port=80 --target-port=80 --type=NodePort -n squidgame
+---------------------------------------------------------------------------------------------------------------
