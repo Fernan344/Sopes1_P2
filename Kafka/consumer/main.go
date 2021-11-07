@@ -5,10 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"os"
 	"strings"
 	"time"
 
 	kafka "github.com/segmentio/kafka-go"
+
+	"github.com/go-redis/redis"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -24,13 +27,43 @@ type GameLog struct {
 }
 
 func getKafkaReader(kafkaURL, topic string) *kafka.Reader {
+	fmt.Println("Conectando a kafka " + kafkaURL + " al Topic " + topic)
 	brokers := strings.Split(kafkaURL, ",")
+	fmt.Println("Brokers:")
+	fmt.Println(brokers)
 	return kafka.NewReader(kafka.ReaderConfig{
 		Brokers:  brokers,
 		Topic:    topic,
 		MinBytes: 10e3, // 10KB
 		MaxBytes: 10e6, // 10MB
 	})
+}
+
+func insertRedis(data GameLog) {
+	var addr = "34.71.214.209:6379"
+	var password = ""
+	c := redis.NewClient(&redis.Options{
+		Addr:     addr,
+		Password: password,
+	})
+	p, err := c.Ping().Result()
+	if err != nil {
+		fmt.Println("redis kill")
+		c.Close()
+		return
+	}
+	fmt.Println(p)
+	var datos_string = fmt.Sprintf(`{
+ 		"request_number": %d,
+		"game":           %d,
+		"gamename":       %s,
+		"winner":         %s,
+		"players":        %d,
+		"worker":         "Kafka",
+	}`, data.RequestNumber, data.Game, data.GameName, data.Winner, data.Players)
+	c.RPush("datos", datos_string)
+	c.Close()
+	fmt.Println("Se inserto la data exitosamente en Redis")
 }
 
 func insertMongo(data GameLog) {
@@ -72,27 +105,30 @@ func insertMongo(data GameLog) {
 	if insertErr != nil {
 		log.Fatal(insertErr)
 	}
-	fmt.Println("Se inserto el log exitosamente")
+	fmt.Println("Se inserto el log exitosamente en MongoDB")
 	fmt.Println(res)
 }
 
 func main() {
 	// get kafka reader using environment variables.
-	kafkaURL := "localhost:29092"
+	kafkaURL := os.Getenv("KAFKA_URL")
 	topic := "kafka1"
+	fmt.Println(kafkaURL)
 
 	reader := getKafkaReader(kafkaURL, topic)
 
 	defer reader.Close()
 
-	fmt.Println("Consumidor Iniciado ... !!")
+	fmt.Println("Consumidor Iniciado!")
 	for {
 		m, err := reader.ReadMessage(context.Background())
 		if err != nil {
+			fmt.Println("ocurrio un error leyendo mensajes")
 			log.Fatalln(err)
 		}
 		data := GameLog{}
 		json.Unmarshal([]byte(string(m.Value)), &data)
 		insertMongo(data)
+		insertRedis(data)
 	}
 }

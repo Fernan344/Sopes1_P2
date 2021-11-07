@@ -5,9 +5,16 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 
 	kafka "github.com/segmentio/kafka-go"
 )
+
+func HomeHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("publish Funciona")
+	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "publish Kafka funcionando")
+}
 
 func producerHandler(kafkaWriter *kafka.Writer) func(http.ResponseWriter, *http.Request) {
 	return http.HandlerFunc(func(wrt http.ResponseWriter, req *http.Request) {
@@ -38,16 +45,20 @@ func getKafkaWriter(kafkaURL, topic string) *kafka.Writer {
 
 func main() {
 	// get kafka writer using environment variables.
-	kafkaURL := "localhost:29092"
+	kafkaURL := os.Getenv("KAFKA_URL")
+	fmt.Println(kafkaURL)
 	topic := "kafka1"
 	kafkaWriter := getKafkaWriter(kafkaURL, topic)
 
 	defer kafkaWriter.Close()
 
 	// Add handle func for producer.
-	http.HandleFunc("/", producerHandler(kafkaWriter))
+	http.HandleFunc("/", HomeHandler)
+	http.HandleFunc("/datos", producerHandler(kafkaWriter))
 
 	// Run the web server.
-	fmt.Println("start producer-api ... !!")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	port := os.Getenv("PORT")
+	fmt.Println(port)
+	fmt.Printf("Productor iniciado en el puerto %s\n", port)
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 }
