@@ -183,7 +183,7 @@ func main() {
 	hostname := os.Getenv("SVC_HOST_NAME")
 
 	if len(hostname) <= 0 {
-		hostname = "serverqueue"
+		hostname = "serverqueuepubsub"
 		// "35.202.225.144"
 	}
 

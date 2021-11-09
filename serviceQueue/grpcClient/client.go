@@ -72,7 +72,7 @@ func client(data []byte) (respuesta error) {
 	hostname := os.Getenv("SVC_HOST_NAME")
 
 	if len(hostname) <= 0 {
-		hostname = "localhost"
+		hostname = "serverqueuepubsub"
 	}
 
 	port := os.Getenv("SVC_PORT")

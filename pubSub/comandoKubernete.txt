@@ -10,6 +10,13 @@ kubectl autoscale deployment pub --cpu-percent=50 --min=1 --max=10 -n squidgame
 kubectl create deployment sub --image=andreapalomo/sub -n squidgame
 kubectl autoscale deployment sub --cpu-percent=50 --min=1 --max=10 -n squidgame
 ---------------------------------------------------------------------------------------------------------------
+
+kubectl create deployment serverqueuepubsub --image=andreapalomo/serverqueuepubsub -n squidgame
+kubectl autoscale deployment serverqueuepubsub --cpu-percent=50 --min=1 --max=10 -n squidgame
+---------------------------------------------------------------------------------------------------------------
+kubectl create deployment clientqueuepubsub --image=andreapalomo/clientqueuepubsub -n squidgame
+kubectl autoscale deployment clientqueuepubsub --cpu-percent=50 --min=1 --max=10 -n squidgame
+---------------------------------------------------------------------------------------------------------------
 -crear los servicios de cada deployment
 kubectl expose deployment pubsubworker --port=80 --target-port=4444 --type=LoadBalancer -n squidgame
 ---------------------------------------------------------------------------------------------------------------
@@ -17,3 +24,8 @@ kubectl expose deployment pub --port=80 --target-port=3333 --type=LoadBalancer -
 ---------------------------------------------------------------------------------------------------------------
 kubectl expose deployment sub --port=80 --target-port=80 --type=NodePort -n squidgame
 ---------------------------------------------------------------------------------------------------------------
+kubectl expose deployment serverqueuepubsub --port=9080 --target-port=9080 --type=NodePort -n squidgame
+---------------------------------------------------------------------------------------------------------------
+kubectl expose deployment clientqueuepubsub --port=80 --target-port=4444 --type=LoadBalancer -n squidgame
+---------------------------------------------------------------------------------------------------------------
+
