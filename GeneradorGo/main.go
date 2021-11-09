@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"math/rand"
 	"net/http"
 	"os"
@@ -17,7 +18,7 @@ type Games struct {
 }
 
 /*Utils*/
-var dominio string = "http://localhost:4000/"
+var dominio string = "http://localhost:4444/"
 
 /*Colors*/
 var colorReset string = "\033[0m"
@@ -196,7 +197,7 @@ func doPetition(enlace string) {
 		return
 	}
 
-	//log.Printf("Código de respuesta: %d", respuesta.StatusCode)
+	log.Printf("Código de respuesta: %d", res.StatusCode)
 	//log.Printf("Encabezados: '%q'", respuesta.Header)
 	//contentType := respuesta.Header.Get("Content-Type")
 	//log.Printf("El tipo de contenido: '%s'", contentType)
@@ -205,12 +206,11 @@ func doPetition(enlace string) {
 func generarEndPoint(maxPlayers int, quit chan bool, terminados *int, maxGames int, trabajando *int, startTime time.Time, timeOut int) {
 	*trabajando++
 	for {
-
-		players := rand.Intn(maxPlayers)
+		players := rand.Intn(maxPlayers) + 1
 		juego := rand.Intn(len(AllGames))
 		game := AllGames[juego]
 
-		endPoint := dominio + "game/" + game.Id + "/gamename/" + game.Name + "/players/" + strconv.Itoa(players)
+		endPoint := dominio + "datos/" + "game/" + game.Id + "/gamename/" + game.Name + "/players/" + strconv.Itoa(players) + "/" + strconv.Itoa(*terminados)
 
 		fmt.Println(endPoint)
 
@@ -252,9 +252,9 @@ func gameGen() {
 
 		terminados := 0
 		trabajando := 0
-
 		start := time.Now()
 		for i := 0; i < maxConcurrence; i++ {
+
 			if i < maxGames {
 				go generarEndPoint(maxPlayers, quit, &terminados, maxGames, &trabajando, start, maxTime)
 			}
