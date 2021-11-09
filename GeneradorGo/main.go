@@ -18,7 +18,7 @@ type Games struct {
 }
 
 /*Utils*/
-var dominio string = "http://localhost:4000/datos/"
+var dominio string = "http://35.239.184.91/datos/"
 
 /*Colors*/
 var colorReset string = "\033[0m"
