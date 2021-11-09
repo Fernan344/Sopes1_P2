@@ -80,7 +80,7 @@ func insertMongo(data Informacion) {
 	if insertErr != nil {
 		log.Fatal(insertErr)
 	}
-	fmt.Println("Se inserto el log exitosamente")
+	log.Println("Se inserto en mongo")
 	fmt.Println(res)
 }
 
@@ -108,7 +108,7 @@ func DBredis(data string) int {
 func EnviarDatos(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
 	var dato Informacion
-	dato.Worker = "PubSub"
+
 	reqBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		w.WriteHeader(http.StatusNotFound)
@@ -116,6 +116,7 @@ func EnviarDatos(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	json.Unmarshal(reqBody, &dato)
+	dato.Worker = "PubSub"
 	datoJson, err := json.Marshal(dato)
 	if err != nil {
 		w.WriteHeader(http.StatusNotFound)
@@ -130,7 +131,7 @@ func EnviarDatos(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// aqui estara mongo db
-	fmt.Println("dato Cargado Redis")
+	log.Println("dato Cargado Redis")
 
 	//var data GameLog
 
