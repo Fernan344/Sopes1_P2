@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"math/rand"
 	"net/http"
 	"os"
@@ -196,7 +197,7 @@ func doPetition(enlace string) {
 		return
 	}
 
-	//log.Printf("Código de respuesta: %d", respuesta.StatusCode)
+	log.Printf("Código de respuesta: %d", res.StatusCode)
 	//log.Printf("Encabezados: '%q'", respuesta.Header)
 	//contentType := respuesta.Header.Get("Content-Type")
 	//log.Printf("El tipo de contenido: '%s'", contentType)
@@ -252,9 +253,9 @@ func gameGen() {
 
 		terminados := 0
 		trabajando := 0
-
 		start := time.Now()
 		for i := 0; i < maxConcurrence; i++ {
+
 			if i < maxGames {
 				go generarEndPoint(maxPlayers, quit, &terminados, maxGames, &trabajando, start, maxTime)
 			}
