@@ -136,7 +136,7 @@ func EnviarDatos(w http.ResponseWriter, r *http.Request) {
 	//var data GameLog
 
 	//json.Unmarshal(reqBody, &data)
-
+	log.Println(string(datoJson))
 	insertMongo(dato)
 
 	w.WriteHeader(http.StatusOK)
@@ -177,6 +177,7 @@ func VerDatos(w http.ResponseWriter, r *http.Request) {
 }
 func main() {
 	router := mux.NewRouter()
+	log.Println("Server encendido")
 	router.HandleFunc("/", HomeRoute)
 	router.HandleFunc("/datos", EnviarDatos).Methods("POST")
 	router.HandleFunc("/limpiar", LimpiarLista).Methods("GET")
