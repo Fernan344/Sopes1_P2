@@ -17,7 +17,7 @@ type Games struct {
 }
 
 /*Utils*/
-var dominio string = "http://localhost:4000/"
+var dominio string = "http://localhost:4000/datos/"
 
 /*Colors*/
 var colorReset string = "\033[0m"
@@ -206,11 +206,11 @@ func generarEndPoint(maxPlayers int, quit chan bool, terminados *int, maxGames i
 	*trabajando++
 	for {
 
-		players := rand.Intn(maxPlayers)
+		players := rand.Intn(maxPlayers) + 1
 		juego := rand.Intn(len(AllGames))
 		game := AllGames[juego]
 
-		endPoint := dominio + "game/" + game.Id + "/gamename/" + game.Name + "/players/" + strconv.Itoa(players)
+		endPoint := dominio + "game/" + game.Id + "/gamename/" + game.Name + "/players/" + strconv.Itoa(players) + "/" + strconv.Itoa(*terminados)
 
 		fmt.Println(endPoint)
 
