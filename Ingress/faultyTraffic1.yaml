@@ -1,0 +1,9 @@
+apiVersion: faultyTraffic1
+kind: TrafficSplit
+metadata:
+  name: faultyTraffic1
+spec:
+  service: faultyTraffic1
+  backends:
+  - service: clientqueuepubsub	
+    weight: 100
