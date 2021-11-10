@@ -50,7 +50,7 @@ kubectl expose deployment sub --port=80 --target-port=80 --type=ClusterIP -n squ
 ---------------------------------------------------------------------------------------------------------------
 kubectl expose deployment serverqueuepubsub --port=9080 --target-port=9080 --type=ClusterIP -n squidgame
 ---------------------------------------------------------------------------------------------------------------
-kubectl expose deployment clientqueuepubsub --port=80 --target-port=4444 --type=LoadBalancer -n squidgame
+kubectl expose deployment clientqueuepubsub --port=80 --target-port=4444 --type=ClusterIP -n squidgame
 ---------------------------------------------Kafka-------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------
 kubectl expose deployment serverqueuekafka --port=9080 --target-port=9080 --type=ClusterIP -n squidgame
