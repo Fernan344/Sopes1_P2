@@ -1,20 +1,20 @@
 -crear el namespace
 kubectl create namespace squidgame
 -crear los deployments de cada imagen
-kubectl create deployment pubsubworker --image=andreapalomo/pubsubkorker -n squidgame
+kubectl create deployment pubsubworker --image=andreapalomo/pubsubworker:latest -n squidgame
 kubectl autoscale deployment pubsubworker --cpu-percent=50 --min=1 --max=10 -n squidgame
 ---------------------------------------------------------------------------------------------------------------
-kubectl create deployment pub --image=andreapalomo/pub -n squidgame
+kubectl create deployment pub --image=andreapalomo/pub:latest -n squidgame
 kubectl autoscale deployment pub --cpu-percent=50 --min=1 --max=10 -n squidgame
 ---------------------------------------------------------------------------------------------------------------
-kubectl create deployment sub --image=andreapalomo/sub -n squidgame
+kubectl create deployment sub --image=andreapalomo/sub:latest -n squidgame
 kubectl autoscale deployment sub --cpu-percent=50 --min=1 --max=10 -n squidgame
 ---------------------------------------------------------------------------------------------------------------
 
-kubectl create deployment serverqueuepubsub --image=andreapalomo/serverqueuepubsub -n squidgame
+kubectl create deployment serverqueuepubsub --image=andreapalomo/serverqueuepubsub:latest -n squidgame
 kubectl autoscale deployment serverqueuepubsub --cpu-percent=50 --min=1 --max=10 -n squidgame
 ---------------------------------------------------------------------------------------------------------------
-kubectl create deployment clientqueuepubsub --image=andreapalomo/clientqueuepubsub -n squidgame
+kubectl create deployment clientqueuepubsub --image=andreapalomo/clientqueuepubsub:latest -n squidgame
 kubectl autoscale deployment clientqueuepubsub --cpu-percent=50 --min=1 --max=10 -n squidgame
 ---------------------------------------------------------------------------------------------------------------
 -crear los servicios de cada deployment

@@ -113,7 +113,7 @@ func callService(c grpcapi.GrpcServiceClient, data []byte) (respuesta error) {
 	log.Printf("Response from Service: %v", res.Response)
 	return
 }
-func HomeRoute(w http.ResponseWriter, r *http.Request) {
+func LimpiarRuta(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
 	// aqui creo la coneccion con grpc
 	var datos Informacion
@@ -133,7 +133,7 @@ func HomeRoute(w http.ResponseWriter, r *http.Request) {
 	}
 
 }
-func LimpiarRuta(w http.ResponseWriter, r *http.Request) {
+func HomeRoute(w http.ResponseWriter, r *http.Request) {
 
 	enableCors(&w)
 	fmt.Println("grpc client Funciona")
