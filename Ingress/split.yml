@@ -5,7 +5,7 @@ metadata:
 spec:
   service: api-dummy-service
   backends:
-  - service: pub
+  - service: grpc-service
     weight: 50
-  - service: sub
+  - service: redis-service
     weight: 50
