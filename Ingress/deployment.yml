@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: api-dummy-container
-        image: gcr.io/pure-advantage-305004/api-dummy
+        image: gcr.io/elite-wonder-329016/api-dummy
         ports:
         - containerPort: 5000
