@@ -2,8 +2,9 @@ apiVersion: split.smi-spec.io/v1alpha1
 kind: TrafficSplit
 metadata:
   name: splittraffic
+  namespace: squidgame
 spec:
-  service: api-dummy-service
+  service: faultyTrafic2
   backends:
   - service: clientqueuepubsub
     weight: 100
