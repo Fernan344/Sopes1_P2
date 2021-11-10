@@ -1,9 +1,9 @@
-apiVersion: faultyTraffic1
+apiVersion: split.smi-spec.io/v1alpha3
 kind: TrafficSplit
 metadata:
-  name: faultyTraffic1
+  name: target-ts
 spec:
-  service: faultyTraffic1
+  service: target-svc
   backends:
-  - service: clientqueuepubsub	
+  - service: clientqueuepubsub
     weight: 100
