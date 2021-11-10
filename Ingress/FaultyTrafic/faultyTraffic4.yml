@@ -5,5 +5,7 @@ metadata:
 spec:
   service: api-dummy-service
   backends:
-  - service: clientqueuekafka
-    weight: 100
+  - service: clientqueuepubsub
+    weight: 50
+  - service: faultytraffic4
+    weight: 50

@@ -1,9 +1,11 @@
 apiVersion: split.smi-spec.io/v1alpha1
 kind: TrafficSplit
 metadata:
-  name: splittraffic
+  name: split-traffic
 spec:
   service: api-dummy-service
   backends:
-  - service: clientqueuepubsub
-    weight: 100
+  - service: clientqueuekafka
+    weight: 50
+  - service: faultytraffic4
+    weight: 50
