@@ -36,7 +36,7 @@ func main() {
 			json.Unmarshal([]byte(v.Data), &inf)
 			//fmt.Printf("%s: message: %s\n", v.Channel, v.Data)
 			//var url = "http://34.135.212.42:80"
-			var url = "pubsubworker"
+			var url = "http://pubsubworker"
 			switch inf.Ruta {
 			case 1:
 				clienteHttp := &http.Client{}

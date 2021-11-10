@@ -77,5 +77,6 @@ kubectl delete deployment clientqueuekafka -n squidgame
 kubectl delete deployment clientqueuerabbit -n squidgame
 kubectl delete deployment serverqueuepurabbit -n squidgame
 
+kubectl expose deployment pubsubworker --port=80 --target-port=4444 --type=ClusterIP -n squidgame
 
-
+kubectl expose deployment sub --port=80 --target-port=80 --type=ClusterIP -n squidgame
