@@ -33,7 +33,7 @@ type Informacion struct {
 }
 
 func (*grpcServer) GrpcService(ctx context.Context, req *grpcapi.GrpcRequest) (*grpcapi.GrpcResponse, error) {
-	var url = "http://35.223.124.77"
+	var url = "http://apirabbit"
 	fmt.Printf("grpcServer %v\n", req)
 	name, _ := os.Hostname()
 
@@ -183,7 +183,7 @@ func main() {
 	hostname := os.Getenv("SVC_HOST_NAME")
 
 	if len(hostname) <= 0 {
-		hostname = "serverqueuepubsub"
+		hostname = "serverqueuerabbit"
 		// "35.202.225.144"
 	}
 
