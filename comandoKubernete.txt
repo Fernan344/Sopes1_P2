@@ -1,6 +1,9 @@
 -crear el namespace
 kubectl create namespace squidgame
 -crear los deployments de cada imagen
+-------------------------------------ingress---------------------------------------------------------------------------------
+kubectl create deployment ingress  --image=andreapalomo/ingress:latest -n squidgame 
+kubectl expose deployment ingress --port=80 --target-port=80 --type=LoadBalancer -n squidgame
 -------------------------------------Pubsub---------------------------------------------------------------------------------
 kubectl create deployment pubsubworker  --image=andreapalomo/pubsubworker:latest -n squidgame --replicas=3
 kubectl autoscale deployment pubsubworker --cpu-percent=10 --min=1 --max=10 -n squidgame
