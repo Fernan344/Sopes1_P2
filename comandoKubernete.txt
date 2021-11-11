@@ -45,24 +45,18 @@ kubectl autoscale deployment clientqueuerabbit --cpu-percent=10 --min=1 --max=10
 
 
 -crear los servicios de cada deployment
+-----------------------------------------------pubsub---------------------------------------------------------
 kubectl expose deployment pubsubworker --port=80 --target-port=4444 --type=ClusterIP -n squidgame
----------------------------------------------------------------------------------------------------------------
+ 
 kubectl expose deployment pub --port=80 --target-port=3333 --type=ClusterIP -n squidgame
----------------------------------------------------------------------------------------------------------------
 kubectl expose deployment sub --port=80 --target-port=80 --type=ClusterIP -n squidgame
----------------------------------------------------------------------------------------------------------------
 kubectl expose deployment serverqueuepubsub --port=9080 --target-port=9080 --type=ClusterIP -n squidgame
----------------------------------------------------------------------------------------------------------------
 kubectl expose deployment clientqueuepubsub --port=80 --target-port=4444 --type=ClusterIP -n squidgame
 ---------------------------------------------Kafka-------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------
 kubectl expose deployment serverqueuekafka --port=9080 --target-port=9080 --type=ClusterIP -n squidgame
----------------------------------------------------------------------------------------------------------------
 kubectl expose deployment clientqueuekafka --port=80 --target-port=4444 --type=ClusterIP -n squidgame
----------------------------------------------------------------------------------------------------------------
 ---------------------------------------------Rabbit-------------------------------------------------------------
 kubectl expose deployment serverqueuerabbit --port=9080 --target-port=9080 --type=ClusterIP -n squidgame
----------------------------------------------------------------------------------------------------------------
 kubectl expose deployment clientqueuerabbit --port=80 --target-port=4444 --type=ClusterIP -n squidgame
 
 
