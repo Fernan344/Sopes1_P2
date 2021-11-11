@@ -12,8 +12,8 @@ func EnviarDatos(w http.ResponseWriter, r *http.Request) {
 
 	enableCors(&w)
 	fmt.Println("faultyTrafic")
-	w.WriteHeader(http.StatusNotFound)
-	fmt.Fprintf(w, "faulty Trafic ")
+	w.WriteHeader(http.StatusAccepted)
+	fmt.Fprintf(w, "faulty Trafic")
 }
 func HomeRoute(w http.ResponseWriter, r *http.Request) {
 
