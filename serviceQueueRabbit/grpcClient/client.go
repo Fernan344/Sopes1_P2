@@ -136,9 +136,9 @@ func LimpiarRuta(w http.ResponseWriter, r *http.Request) {
 func HomeRoute(w http.ResponseWriter, r *http.Request) {
 
 	enableCors(&w)
-	fmt.Println("grpc client Funciona")
+	fmt.Println("grpc client Funciona RABBIT")
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, "grpc client")
+	fmt.Fprintf(w, "grpc client RABBIT")
 }
 func main() {
 	log.Println("server corriendo en el puerto 4444")
