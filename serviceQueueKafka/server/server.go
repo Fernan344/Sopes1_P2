@@ -33,7 +33,7 @@ type Informacion struct {
 }
 
 func (*grpcServer) GrpcService(ctx context.Context, req *grpcapi.GrpcRequest) (*grpcapi.GrpcResponse, error) {
-	var url = "http://apikafka"
+	var url = "http://skp"
 	fmt.Printf("grpcServer %v\n", req)
 	name, _ := os.Hostname()
 
