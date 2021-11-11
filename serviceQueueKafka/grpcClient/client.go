@@ -138,7 +138,7 @@ func HomeRoute(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
 	fmt.Println("grpc client Funciona PUBSUB")
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, "grpc client")
+	fmt.Fprintf(w, "grpc client PUBSUB")
 }
 func main() {
 	log.Println("server corriendo en el puerto 4444")
