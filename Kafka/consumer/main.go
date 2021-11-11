@@ -112,10 +112,6 @@ func insertMongo(data GameLog) {
 func main() {
 	// get kafka reader using environment variables.
 	kafkaURL := os.Getenv("KAFKA_URL")
-	if len(kafkaURL) <= 0 {
-		kafkaURL = "kafkaconsumer:9092"
-	}
-
 	topic := "kafka1"
 	fmt.Println(kafkaURL)
 

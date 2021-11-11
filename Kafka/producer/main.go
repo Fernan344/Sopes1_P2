@@ -46,9 +46,6 @@ func getKafkaWriter(kafkaURL, topic string) *kafka.Writer {
 func main() {
 	// get kafka writer using environment variables.
 	kafkaURL := os.Getenv("KAFKA_URL")
-	if len(kafkaURL) <= 0 {
-		kafkaURL = "kafkaconsumer:9092"
-	}
 	fmt.Println(kafkaURL)
 	topic := "kafka1"
 	kafkaWriter := getKafkaWriter(kafkaURL, topic)
