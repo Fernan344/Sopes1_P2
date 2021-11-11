@@ -12,7 +12,7 @@ func EnviarDatos(w http.ResponseWriter, r *http.Request) {
 
 	enableCors(&w)
 	fmt.Println("faultyTrafic")
-	w.WriteHeader(http.StatusNotFound)
+	w.WriteHeader(http.StatusAccepted)
 	fmt.Fprintf(w, "faulty Trafic ")
 }
 func HomeRoute(w http.ResponseWriter, r *http.Request) {
@@ -27,7 +27,7 @@ func main() {
 	router := mux.NewRouter()
 	router.HandleFunc("/", HomeRoute).Methods("GET")
 	router.HandleFunc("/datos/{game}/{gameV}/{gamename}/{gamenameV}/{players}/{playersV}/{contadorV}", EnviarDatos).Methods("GET")
-	log.Fatal(http.ListenAndServe(":4444", router))
+	log.Fatal(http.ListenAndServe(":4644", router))
 }
 
 // esta funcion sirve para poder mandar peticiones a angular

@@ -18,7 +18,7 @@ type Games struct {
 }
 
 /*Utils*/
-var dominio string = "http://34.66.71.178/datos/"
+var dominio string = "http://35.239.184.91/datos/"
 
 /*Colors*/
 var colorReset string = "\033[0m"
@@ -196,8 +196,13 @@ func doPetition(enlace string) {
 		printError(fmt.Sprintln(error3, " Code: 404 ", enlace))
 		return
 	}
+	if res.StatusCode == 202 {
+		printError(fmt.Sprintln("Ruta Faulty", " Code: 404 ", enlace))
+		log.Printf("Código de respuesta: 404")
+	} else {
 
-	log.Printf("Código de respuesta: %d", res.StatusCode)
+		log.Printf("Código de respuesta: %d", res.StatusCode)
+	}
 	//log.Printf("Encabezados: '%q'", respuesta.Header)
 	//contentType := respuesta.Header.Get("Content-Type")
 	//log.Printf("El tipo de contenido: '%s'", contentType)
