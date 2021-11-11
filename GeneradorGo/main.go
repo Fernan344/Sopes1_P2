@@ -199,7 +199,7 @@ func doPetition(enlace string) {
 		//return
 	}
 	if res.StatusCode == 202 {
-		printError(fmt.Sprintln("Ruta Faulty", " Code: 404 ", enlace))
+		log.Printf(fmt.Sprintln("Ruta Faulty", " Code: 404 ", enlace))
 		log.Printf("Código de respuesta: 404")
 	}
 	if res.StatusCode == 200 {

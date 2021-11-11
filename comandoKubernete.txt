@@ -23,6 +23,15 @@ kubectl autoscale deployment serverqueuepubsub --cpu-percent=10 --min=1 --max=10
 kubectl create deployment clientqueuepubsub   --image=andreapalomo/clientqueuepubsub:latest -n squidgame
 kubectl autoscale deployment clientqueuepubsub --cpu-percent=10 --min=1 --max=10 -n squidgame
 -------------------------------------Kafka---------------------------------------------------------------------------------
+
+kubectl create deployment kafka1  --image=tato30/sopes-kafka-consumer:latest -n squidgame --replicas=3
+kubectl autoscale deployment kafka1 --cpu-percent=10 --min=1 --max=10 -n squidgame
+
+kubectl create deployment producerkafka  --image=tato30/sopes-kafka-consumer:latest -n squidgame --replicas=3
+kubectl autoscale deployment producerkafka --cpu-percent=10 --min=1 --max=10 -n squidgame
+
+
+
 kubectl create deployment kafkaconsumer  --image=tato30/sopes-kafka-consumer:latest -n squidgame
 kubectl autoscale deployment kafkaconsumer --cpu-percent=10 --min=1 --max=10 -n squidgame
 
