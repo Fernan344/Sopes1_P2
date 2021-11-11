@@ -2,7 +2,7 @@
 kubectl create namespace squidgame
 -crear los deployments de cada imagen
 -------------------------------------ingress---------------------------------------------------------------------------------
-kubectl create deployment ingress  --image=andreapalomo/ingress:latest -n squidgame 
+kubectl create deployment ingress  --image=andreapalomo/ingressruta1:latest -n squidgame 
 kubectl expose deployment ingress --port=80 --target-port=80 --type=LoadBalancer -n squidgame
 -------------------------------------faulty Trafic---------------------------------------------------------------------------------
 kubectl create deployment faulty  --image=andreapalomo/faulty:latest -n squidgame 
