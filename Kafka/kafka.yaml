@@ -71,16 +71,23 @@ metadata:
   creationTimestamp: null
   labels:
     app: skp-service
-  name: skp
+  name: apikafka
   namespace: squidgame
 spec:
+  clusterIP: 10.52.0.146
+  clusterIPs:
+  - 10.52.0.146
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
   ports:
-  - port: 4000
+  - port: 80
     protocol: TCP
     targetPort: 4000
   selector:
-    app: skp
-  type: LoadBalancer
+    app: apikafka
+  sessionAffinity: None
+  type: ClusterIP
 status:
   loadBalancer: {}
 
