@@ -39,20 +39,20 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: skp
-  name: skp
+    app: apikafka
+  name: apikafka
   namespace: squidgame
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: skp
+      app: apikafka
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: skp
+        app: apikafka
     spec:
       containers:
       - image: tato30/sopes-kafka-producer
@@ -70,7 +70,7 @@ kind: Service
 metadata:
   creationTimestamp: null
   labels:
-    app: skp-service
+    app: apikafka-service
   name: apikafka
   namespace: squidgame
 spec:
