@@ -27,7 +27,7 @@ func main() {
 	router := mux.NewRouter()
 	router.HandleFunc("/", HomeRoute).Methods("GET")
 	router.HandleFunc("/datos/{game}/{gameV}/{gamename}/{gamenameV}/{players}/{playersV}/{contadorV}", EnviarDatos).Methods("GET")
-	log.Fatal(http.ListenAndServe(":4644", router))
+	log.Fatal(http.ListenAndServe(":4444", router))
 }
 
 // esta funcion sirve para poder mandar peticiones a angular
