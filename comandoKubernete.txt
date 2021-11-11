@@ -4,6 +4,9 @@ kubectl create namespace squidgame
 -------------------------------------ingress---------------------------------------------------------------------------------
 kubectl create deployment ingress  --image=andreapalomo/ingress:latest -n squidgame 
 kubectl expose deployment ingress --port=80 --target-port=80 --type=LoadBalancer -n squidgame
+-------------------------------------faulty Trafic---------------------------------------------------------------------------------
+kubectl create deployment faulty  --image=andreapalomo/faulty:latest -n squidgame 
+kubectl expose deployment faulty --port=80 --target-port=4444 --type=ClusterIP -n squidgame
 -------------------------------------Pubsub---------------------------------------------------------------------------------
 kubectl create deployment pubsubworker  --image=andreapalomo/pubsubworker:latest -n squidgame --replicas=3
 kubectl autoscale deployment pubsubworker --cpu-percent=10 --min=1 --max=10 -n squidgame
@@ -58,8 +61,7 @@ kubectl expose deployment clientqueuekafka --port=80 --target-port=4444 --type=C
 ---------------------------------------------Rabbit-------------------------------------------------------------
 kubectl expose deployment serverqueuerabbit --port=9080 --target-port=9080 --type=ClusterIP -n squidgame
 kubectl expose deployment clientqueuerabbit --port=80 --target-port=4444 --type=ClusterIP -n squidgame
-
-
+ 
 
 
 kubectl delete deployment pubsubworker -n squidgame
