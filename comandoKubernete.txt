@@ -88,3 +88,47 @@ kubectl expose deployment pubsubworker --port=80 --target-port=4444 --type=Clust
 kubectl expose deployment sub --port=80 --target-port=80 --type=ClusterIP -n squidgame
 -------------------
 kubectl apply -f deployment.yml -n squidgame
+
+
+
+
+
+
+
+
+
+docker build -t andreapalomo/clientqueuepubsub:latest .
+docker push andreapalomo/clientqueuepubsub:latest 
+
+docker build -t andreapalomo/clientqueuekafka:latest ./grpcClient/
+docker build -t andreapalomo/serverqueuekafka:latest ./server/
+docker push andreapalomo/clientqueuekafka:latest 
+docker push  andreapalomo/serverqueuekafka:latest 
+
+docker build -t andreapalomo/serverqueuerabbit:latest ./grpcClient/
+docker build -t andreapalomo/clientqueuerabbit:latest ./server/
+docker push  andreapalomo/serverqueuerabbit:latest 
+docker push andreapalomo/clientqueuerabbit:latest 
+
+
+
+
+docker build -t andreapalomo/ingressruta1:latest ./ruta1/
+docker push andreapalomo/ingressruta1:latest 
+docker build -t andreapalomo/ingressruta2:latest ./ruta2/
+docker push andreapalomo/ingressruta2:latest 
+docker build -t andreapalomo/ingressruta3:latest ./ruta3/
+docker push andreapalomo/ingressruta3:latest 
+docker build -t andreapalomo/ingressruta4:latest ./ruta4/
+docker push andreapalomo/ingressruta4:latest 
+docker build -t andreapalomo/ingressruta5:latest ./ruta5/
+docker push andreapalomo/ingressruta5:latest 
+docker build -t andreapalomo/ingressruta6:latest ./ruta6/
+docker push andreapalomo/ingressruta6:latest
+docker build -t andreapalomo/ingressruta7:latest ./ruta7/
+docker push andreapalomo/ingressruta7:latest  
+
+---------------------LINKERD---------------------------------------------------------------
+linkerd viz dashboard &
+kubectl get deployments -n squidgame -o yaml | linkerd inject - | kubectl apply -f -
+linkerd stat deployments -n squidgame 
