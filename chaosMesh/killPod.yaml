@@ -5,7 +5,7 @@ metadata:
   namespace: squidgame
 spec:
   action: pod-kill
-  mode: tree
+  mode: all
   duration: '30s'
   selector:
 
