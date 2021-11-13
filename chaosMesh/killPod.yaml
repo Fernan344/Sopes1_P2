@@ -2,13 +2,12 @@ apiVersion: chaos-mesh.org/v1alpha1
 kind: PodChaos
 metadata:
   name: pod-kill-httpd
-  namespace: chaos-testing
+  namespace: squidgame
 spec:
   action: pod-kill
-  mode: one
+  mode: tree
   duration: '30s'
   selector:
-    namespaces:
-  		- squidgame 
+
     labelSelectors:
       "app": "matarpod"
