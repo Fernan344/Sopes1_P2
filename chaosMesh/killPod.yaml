@@ -11,5 +11,5 @@ spec:
   	namespaces:
   		- squidgame 
     labelSelectors:
-      'app': 'matarpod'		//DEPLOYMENT LABEL
+      app: matarpod		//DEPLOYMENT LABEL
 
