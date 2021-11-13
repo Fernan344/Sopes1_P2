@@ -132,3 +132,8 @@ docker push andreapalomo/ingressruta7:latest
 linkerd viz dashboard &
 kubectl get deployments -n squidgame -o yaml | linkerd inject - | kubectl apply -f -
 linkerd stat deployments -n squidgame 
+
+
+
+
+kubectl create deployment matarPod  --image=tato30/sopes-kafka-consumer:latest -n squidgame --replicas=3
