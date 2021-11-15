@@ -6,7 +6,7 @@ metadata:
 spec:
   action: pod-kill
   mode: all
-  duration: '30s'
+  duration: '60s'
   selector:
 
     labelSelectors:
