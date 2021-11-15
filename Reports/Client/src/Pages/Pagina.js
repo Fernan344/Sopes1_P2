@@ -12,7 +12,7 @@ class Principal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            cargado: false,
+            cargado: true,
             reportes: [{title: "Tabla De Valores DB", id: "reporte1"}, {title: "Últimos 10 juegos.", id: "reporte2"}, {title: "Los 10 mejores jugadores.", id: "reporte3"}, {title: "Estadísticas del jugador en tiempo real.", id: "reporte4"}, {title: "Log de transacciones en MongoDB.", id: "reporteLog"}, {title: "Tabla con los logs almacenados.", id: "reporte5"}, {title: "Gráfica del top 3 de juegos.", id: "reporte6"}, {title: "Gráfica que compara a los 3 workers de go", id: "reporte7"}],              
             
             reporte1Columnas: {mongo: ["Reporte", "Mongo"], redis: ["Reporte", "Redis"]},
@@ -37,24 +37,23 @@ class Principal extends React.Component {
     componentDidMount(){
         (async () =>{
             socket.on('verificado', data=>{
-                this.setState({
-                    cargado: true,
-                    reporte1Columnas: data.reporte1Columnas,
-                    reporte2Columnas: data.reporte2Columnas,
-                    reporte3Columnas: data.reporte3Columnas,
-                    reporte4Columnas: data.reporte4Columnas,
-                    reporte5Columnas: data.reporte5Columnas,
-                    reporte6Labels: data.reporte6Labels,
-                    reporte7Labels: data.reporte7Labels,
+                    this.setState({
+                        reporte1Columnas: data.reporte1Columnas,
+                        reporte2Columnas: data.reporte2Columnas,
+                        reporte3Columnas: data.reporte3Columnas,
+                        reporte4Columnas: data.reporte4Columnas,
+                        reporte5Columnas: data.reporte5Columnas,
+                        reporte6Labels: data.reporte6Labels,
+                        reporte7Labels: data.reporte7Labels,
 
-                    reporte1Data: data.reporte1Data,
-                    reporte2Data: data.reporte2Data,
-                    reporte3Data: data.reporte3Data,
-                    reporte4Data: data.reporte4Data,
-                    reporte5Data: data.reporte5Data,
-                    reporte6Data: data.reporte6Data,
-                    reporte7Data: data.reporte7Data
-                })
+                        reporte1Data: data.reporte1Data,
+                        reporte2Data: data.reporte2Data,
+                        reporte3Data: data.reporte3Data,
+                        reporte4Data: data.reporte4Data,
+                        reporte5Data: data.reporte5Data,
+                        reporte6Data: data.reporte6Data,
+                        reporte7Data: data.reporte7Data
+                    })
             })
 
             socket.emit('verificar', "")
@@ -163,9 +162,30 @@ class Principal extends React.Component {
                     , <Collapse target={this.state.reportes[4].id} title={this.state.reportes[4].title} component={subDesplegables} type={"btn-outline-info"}/>
                     ]
 
+        let compNav = <div>
+                        <button class={"btn btn-outline-danger btn-sm"} type="button" data-toggle="collapse" data-target={"#"+this.state.reportes[0].id} aria-expanded="false" aria-controls={this.state.reportes[0].id}>
+                            {this.state.reportes[0].title}
+                        </button>
+                        <button class={"btn btn-outline-danger btn-sm"} type="button" data-toggle="collapse" data-target={"#"+this.state.reportes[1].id} aria-expanded="false" aria-controls={this.state.reportes[1].id}>
+                            {this.state.reportes[1].title}
+                        </button>
+                        <button class={"btn btn-outline-danger btn-sm"} type="button" data-toggle="collapse" data-target={"#"+this.state.reportes[2].id} aria-expanded="false" aria-controls={this.state.reportes[2].id}>
+                            {this.state.reportes[2].title}
+                        </button>
+                        <button class={"btn btn-outline-danger btn-sm"} type="button" data-toggle="collapse" data-target={"#"+this.state.reportes[3].id} aria-expanded="false" aria-controls={this.state.reportes[3].id}>
+                            {this.state.reportes[3].title}
+                        </button>
+                        <button class={"btn btn-outline-danger btn-sm"} type="button" data-toggle="collapse" data-target={"#"+this.state.reportes[4].id} aria-expanded="false" aria-controls={this.state.reportes[4].id}>
+                            {this.state.reportes[4].title}
+                        </button>
+                        <button class={"btn btn-outline-danger btn-sm"} type="button" data-toggle="collapse" data-target={"#"+this.state.reportes[5].id} aria-expanded="false" aria-controls={this.state.reportes[5].id}>
+                            {this.state.reportes[5].title}
+                        </button>
+                    </div>
+
         return (
             <form>                
-                <NavVar/>
+                <NavVar comp={compNav}/>
                 <div style={{marginTop: 75}}>
                 {   
                     desplegables
