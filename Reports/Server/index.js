@@ -4,8 +4,7 @@ const http = require('http')
 const clientRouter = require('./src/Routes/user.router')
 const socketClass = require('./src/Recursos/Socket');
 const socketControl = require('./src/Controller/socket.controller')
-
-//require('./Mongo/database')
+require('./src/Recursos/DB/Mongo/Mongo')
 
 const morgan = require('morgan');
 const cors = require('cors')
