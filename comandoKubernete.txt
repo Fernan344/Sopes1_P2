@@ -5,7 +5,7 @@ kubectl create namespace squidgame
 kubectl create deployment redis  --image=redis:latest 
 kubectl expose deployment redis --port=6379 --target-port=6379 --type=LoadBalancer
 -------------------------------------ingress---------------------------------------------------------------------------------
-kubectl create deployment ingress  --image=andreapalomo/ingressruta1:latest -n squidgame --restart=Always
+kubectl create deployment ingress  --image=andreapalomo/ingressruta1:latest -n squidgame 
 kubectl expose deployment ingress --port=80 --target-port=80 --type=LoadBalancer -n squidgame
 -------------------------------------faulty Trafic---------------------------------------------------------------------------------
 kubectl create deployment faulty  --image=andreapalomo/faulty:latest -n squidgame 
@@ -144,3 +144,12 @@ kubectl expose deployment matarpod --port=80 --target-port=4444 --type=ClusterIP
  
 
 kubectl apply -f deployment.yml -n squidgame
+
+
+
+docker build -t andreapalomo/pub:latest ./publish/
+docker build -t andreapalomo/sub:latest ./subscribe/
+docker build -t andreapalomo/pubsubworker:latest ./pubSubWorker/
+docker push andreapalomo/pub:latest
+docker push andreapalomo/pubsubworker:latest 
+docker push  andreapalomo/sub:latest 
