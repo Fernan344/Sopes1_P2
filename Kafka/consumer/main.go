@@ -40,7 +40,7 @@ func getKafkaReader(kafkaURL, topic string) *kafka.Reader {
 }
 
 func insertRedis(data GameLog) {
-	var addr = "34.71.214.209:6379"
+	var addr = "35.232.18.26:6379"
 	var password = ""
 	c := redis.NewClient(&redis.Options{
 		Addr:     addr,
@@ -56,8 +56,8 @@ func insertRedis(data GameLog) {
 	var datos_string = fmt.Sprintf(`{
  		"request_number": %d,
 		"game":           %d,
-		"gamename":       %s,
-		"winner":         %s,
+		"gamename":       "%s",
+		"winner":         "%s",
 		"players":        %d,
 		"worker":         "Kafka",
 	}`, data.RequestNumber, data.Game, data.GameName, data.Winner, data.Players)
