@@ -60,7 +60,7 @@ func LimpiarLista(w http.ResponseWriter, r *http.Request) {
 
 func redisInsert(datos Informacion, peticion int) int {
 	datos.Ruta = peticion
-	conn, err := redis.Dial("tcp", "34.71.214.209:6379")
+	conn, err := redis.Dial("tcp", "35.232.18.26:6379")
 	if err != nil {
 		fmt.Println("error de conexión a la base de datos redis", err)
 		return -1

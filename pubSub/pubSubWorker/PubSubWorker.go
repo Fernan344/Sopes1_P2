@@ -85,7 +85,7 @@ func insertMongo(data Informacion) {
 }
 
 func DBredis(data string) int {
-	var addr = "34.71.214.209:6379"
+	var addr = "35.232.18.26:6379"
 	var password = ""
 	c := redis.NewClient(&redis.Options{
 		Addr:     addr,
@@ -93,6 +93,7 @@ func DBredis(data string) int {
 	})
 	p, err := c.Ping().Result()
 	if err != nil {
+		log.Println(err)
 		fmt.Println("redis kill")
 		c.Close()
 		return -1
@@ -146,7 +147,7 @@ func EnviarDatos(w http.ResponseWriter, r *http.Request) {
 }
 func LimpiarLista(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
-	var addr = "34.71.214.209:6379"
+	var addr = "35.232.18.26:6379"
 	var password = ""
 
 	c := redis.NewClient(&redis.Options{
@@ -162,13 +163,21 @@ func LimpiarLista(w http.ResponseWriter, r *http.Request) {
 }
 func VerDatos(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
-	var addr = "34.71.214.209:6379"
+	var addr = "35.232.18.26:6379"
 	var password = ""
 
 	c := redis.NewClient(&redis.Options{
 		Addr:     addr,
 		Password: password,
 	})
+	p, err := c.Ping().Result()
+	if err != nil {
+		log.Println(err)
+		fmt.Println("redis kill")
+		c.Close()
+		return
+	}
+	fmt.Println(p)
 	rs := c.LRange("datos", 0, 1000).Val()
 	fmt.Println(rs)
 	w.WriteHeader(http.StatusOK)

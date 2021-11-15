@@ -22,7 +22,7 @@ type Informacion struct {
 }
 
 func main() {
-	c, err := redis.Dial("tcp", "34.71.214.209:6379")
+	c, err := redis.Dial("tcp", "35.232.18.26:6379")
 	if err != nil {
 		fmt.Println("error de conexión a la base de datos redis", err)
 
