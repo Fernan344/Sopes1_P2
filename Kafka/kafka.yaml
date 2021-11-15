@@ -74,9 +74,9 @@ metadata:
   name: skp
   namespace: squidgame
 spec:
-  clusterIP: 10.52.0.146
+  clusterIP: 10.76.0.146
   clusterIPs:
-  - 10.52.0.146
+  - 10.76.0.146
   ipFamilies:
   - IPv4
   ipFamilyPolicy: SingleStack
