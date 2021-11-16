@@ -1,3 +1,3 @@
 export function getConnection(){    
-    return 'http://localhost:4000'
+    return `http://backend:4000`
 }
