@@ -74,6 +74,22 @@ kubectl expose deployment clientqueuekafka --port=80 --target-port=4444 --type=C
 kubectl expose deployment serverqueuerabbit --port=9080 --target-port=9080 --type=ClusterIP -n squidgame
 kubectl expose deployment clientqueuerabbit --port=80 --target-port=4444 --type=ClusterIP -n squidgame
  
+--------------------------------------------PAGINA-------------------------------------------------------------
+
+kubectl create deployment pagina  --image=andreapalomo/paginasopes:latest -n squidgame
+kubectl expose deployment pagina --port=80 --target-port=3000 --type=LoadBalancer -n squidgame
+
+kubectl create deployment server  --image=andreapalomo/serversopes:latest -n squidgame
+kubectl expose deployment server --port=4000 --target-port=4000 --type=ClusterIP -n squidgame
+
+
+
+
+
+
+
+
+
 
 
 kubectl delete deployment pubsubworker -n squidgame
