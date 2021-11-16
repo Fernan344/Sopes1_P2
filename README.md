@@ -103,6 +103,16 @@ Con Google Pub / Sub, una vez que se lee un mensaje de una suscripción y se ACK
 
 # Manual de Usuario
 
+# Manual de Usuario
+
+### Utilización de Grafana
+> - Para la utilización de Grafana se encuentra implementado en Linkerd por lo que al momento de levantar Linkerd entre sus funciones y pods se encuentra Grafana para cada uno de estos.
+> ![image](https://user-images.githubusercontent.com/36779113/141879479-5ccdbca2-88b8-4e98-af5e-bea987f714f7.png)
+> ![image](https://user-images.githubusercontent.com/36779113/141876845-7056912c-b890-4682-b495-5ba12b321abd.png)
+>- Cuando se presiona en la figura de Grafana se redireccciona al puerto :3000 y se muestra los datos correspondientes a cada pod y los recursos utilizados
+> ![image](https://user-images.githubusercontent.com/36779113/141879575-38b595e7-31e6-4b68-b673-2fe20410e0fd.png)
+
+>- La utilización de grafana fue muy útil para el monitoreo de cada uno de los elementos utilizados y así mismo observar cuál de estos tuvo una mejor eficiencia en cuanto a sus recursos y envío/recepción de datos.
 ## Puntos Extras
 
 ![image](https://user-images.githubusercontent.com/36779113/141734871-47997ebe-bd4a-41b4-99e3-21d40fc5a6d4.png)
