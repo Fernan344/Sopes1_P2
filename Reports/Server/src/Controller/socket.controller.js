@@ -19,6 +19,7 @@ exports.verificacion = async () => {
             let actualesMongo = await getTotalMongo();
             await getTotalRedis()
             let actualesRedis = session.getItem("valoresRedis").length;
+            socket.emit('verificado', await obtenerReportes(msg))
 
             console.log(actualesMongo+"-"+actualesRedis)
            // if(actualesMongo!=registrosMongo || actualesRedis!=registrosRedis){
@@ -42,6 +43,18 @@ async function getTotalMongo(){
     const optionsTweets = {};
 
     return await collection.find(queryTweets, optionsTweets).count();
+}
+
+function sortResults(arr, prop, asc) {
+    let data = arr;
+    data.sort(function(a, b) {
+        if (asc) {
+            return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
+        } else {
+            return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
+        }
+    });
+    return data;
 }
 
 async function getTotalRedis(){
@@ -69,19 +82,13 @@ function reporte1(arreglo){
     return [arreglo.length, jugadores, juegos.length]
 }
 
-function ordenar(p_array_json, param) {
-    p_array_json.sort(function (a, b) {
-       return parseInt(a[param]) + parseInt(b[param]);
-    });
-    return p_array_json
- }
-
 function reporte2(arreglo){
-    let ordenado = ordenar(arreglo, "request_number")
+    let data = sortResults(arreglo, 'request_number', false)
+
     let retorno = []
     for(var i=0; i<10; i++){
-        if(i==ordenado.length)break
-        let array = [ordenado[i].game, ordenado[i].gamename, ordenado[i].winner, ordenado[i].players, ordenado[i].request_number]
+        if(i==data.length)break
+        let array = [data[i].game, data[i].gamename, data[i].winner, data[i].players]
         retorno.push(array)
     }
     return retorno
@@ -98,14 +105,16 @@ function reporte3(arreglo){
         }else{
             var pos = winners.indexOf(number)
             if(pos!=-1)
-            jsonWinners[pos].wins = jsonWinners[pos].wins + 1 
+            jsonWinners[pos].wins = jsonWinners[pos].wins + 1   
         }
     })
     let retorno = []
-    let ordenado = ordenar(jsonWinners, "wins")
+
+    let data = sortResults(jsonWinners, 'wins', false)
+
     for(var i=0; i<10; i++){
-        if(i==ordenado.length)break
-        let array = [ordenado[i].winner, ordenado[i].wins]
+        if(i==data.length)break
+        let array = [data[i].winner, data[i].wins]
         retorno.push(array)
     }
     return retorno
@@ -165,12 +174,15 @@ function reporte6(arreglo){
     })
     let labels = []
     let data = []
-    let ordenado = ordenar(jsonGames, "plays")
+
+    jsonGames.sort(function (a, b) {
+        return a.plays + b.plays;
+    });
     
     for(var i=0; i<3; i++){
-        if(i==ordenado.length)break
-        labels.push(ordenado[i].gamename)
-        data.push(ordenado[i].plays)
+        if(i==jsonGames.length)break
+        labels.push(jsonGames[i].gamename)
+        data.push(jsonGames[i].plays)
     }
     return {labels: labels, data: data}
 }
