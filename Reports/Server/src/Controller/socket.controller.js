@@ -48,9 +48,11 @@ async function getTotalRedis(){
     await redis.LRANGE("datos", 0, -1, await function (err, data) {
         let newData = []
         data.map(dato=>{
-            newData.push(JSON.parse((dato)))
+            let newDato = JSON.parse((dato))
+            newData.push({request_number: parseInt(newDato.request_number), game: parseInt(newDato.game),
+                gamename: newDato.gamename, winner: parseInt(newDato.winner), players: parseInt(newDato.players), worker: newDato.worker})
         })    
-        session.setItem("valoresRedis", newData)         
+        session.setItem("valoresRedis", newData)       
     });
 }
 
@@ -69,7 +71,7 @@ function reporte1(arreglo){
 
 function ordenar(p_array_json, param) {
     p_array_json.sort(function (a, b) {
-       return a[param] + b[param];
+       return parseInt(a[param]) + parseInt(b[param]);
     });
     return p_array_json
  }
@@ -95,6 +97,7 @@ function reporte3(arreglo){
             jsonWinners.push({winner: number, wins: 1})
         }else{
             var pos = winners.indexOf(number)
+            if(pos!=-1)
             jsonWinners[pos].wins = jsonWinners[pos].wins + 1 
         }
     })
@@ -118,6 +121,7 @@ function reporte4(arreglo, player){
             jsonWinners.push({winner: number, wins: 1})
         }else{
             var pos = winners.indexOf(number)
+            if(pos!=-1)
             jsonWinners[pos].wins = jsonWinners[pos].wins + 1 
         }
     })
