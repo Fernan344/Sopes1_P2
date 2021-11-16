@@ -84,7 +84,10 @@ kubectl expose deployment server --port=4000 --target-port=4000 --type=ClusterIP
 
 
 
-
+docker build -t andreapalomo/paginasopes:latest ./Client/
+docker build -t andreapalomo/serversopes:latest ./Server/
+docker push andreapalomo/paginasopes:latest
+docker push andreapalomo/serversopes:latest
 
 
 
