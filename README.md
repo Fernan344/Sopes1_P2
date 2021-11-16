@@ -13,15 +13,70 @@
 ### Preguntas
 
 > - Cómo funcionan las métricas de oro, cómo puedes interpretar las 7 pruebas de faulty traffic, usando como base los gráficos y métricas que muestra el tablero de Linkerd Grafana.
+>>>
+![image](https://user-images.githubusercontent.com/36779113/141875126-5d8e1c7e-598d-4290-8388-13956abb0da2.png)
+ 
+>>>
 > - Menciona al menos 3 patrones de comportamiento que hayas descubierto en las pruebas de faulty traffic
+>>>
+>- - 
+>>>
 > - ¿Qué sistema de mensajería es más rápido? ¿Por qué?
+>>>
+>- - Kafka, porque es capaz de procesar mensajes y almacenarlos con un modelo publicador-suscriptor con una alta escalabilidad y rendimiento, también  establece un período de retención en comparación con Google Pub-Sub. Kafka es mucho más usado en proyectos en los que se desea una alta tolerancia a fallos y procesamiento en tiempo real.
+>>>
 > - ¿Cuántos recursos utiliza cada sistema de mensajería?
+>>>
+>- - RabbitMQ
+> ![image](https://user-images.githubusercontent.com/36779113/141876845-7056912c-b890-4682-b495-5ba12b321abd.png)
+>- - Kafka
+> ![image](https://user-images.githubusercontent.com/36779113/141876907-27eef487-fea3-4361-bde2-9efcbaa26054.png)
+
+>- - PubSub Google
+> ![image](https://user-images.githubusercontent.com/36779113/141876934-1774993a-37a0-492c-a45b-ca6633b0ebc2.png)
+
+>>>
 > - ¿Cuáles son las ventajas y desventajas de cada servicio de mensajería?
+
+>>>
+>- - RabbitMQ
+>- Ventajas:
+Adecuado para muchos protocolos de mensajería, flexibilidad y plugins disponibles, herramientas de desarrollo varias.
+>- Desventajas:
+No es transaccional por defecto, basado en Erlang para desarrollos.
+>- - Kafka
+>- Ventajas:
+Buena escalabilidad, tolerancia a fallos, plataforma de streaming, multi-tenant, tiempo real, integrable con productos de terceros [Tibco, Mule e incluso Java]
+>- Desventajas:
+Dependencia con Apache Zookeeper, sin enrutamiento de mensajes, carece de componentes de monitorización nativos.
+>- - PubSub Google
+>- Ventajas:
+Cloud Pub / Sub está completamente administrado por el desarrollador. No tiene que preocuparse por las máquinas, configurar clústeres, ajustar parámetros, etc., lo que significa que una gran cantidad de trabajo de DevOps se maneja por el propio desarrollador y esto es importante, especialmente cuando necesita escalar.
+>- Desventajas:
+Con Google Pub / Sub, una vez que se lee un mensaje de una suscripción y se ACK, desaparece. Para tener más copias de un mensaje para ser leídas por diferentes lectores, "distribuye" el tema creando "suscripciones" para ese tema, donde cada suscripción tendrá una copia completa de todo lo que entra en el tema. Pero esto también aumenta el costo porque Google cobra el uso de Pub / Sub por la cantidad de datos leídos.
+
+>>>
+
 > - ¿Cuál es el mejor sistema de mensajería?
+>>>
+>- - Según la imagen anteriores, Kafka resulta siendo el mejor sistema de mensajería debido a que no genera tanta latencia al momento de la interacción con la mensajería. Kafka guarda los mensajes, y cuando un consumidor se conecto le envia todo el historial
+>>>
 > - ¿Cuál de las dos bases de datos se desempeña mejor y por qué?
+>>>
+>- - MongoDB porque tiene más persistencia de datos en comparción con Redis.
+>>>
 > - ¿Cómo se reflejan en los dashboards de Linkerd los experimentos de Chaos Mesh?
+>>>
+>- - 
+>>>
 > - ¿En qué se diferencia cada uno de los experimentos realizados?
+>>>
+>- - Las primeras 3 rutas es solo un canal, mientras que las otras 3 rutas, la mitad se envía y la otra se redirecciona a faulty, mientras que en la última se distribuye en las 3 por lo que esa última es más eficiente porque se distribuye de 3 en 3.
+>>>
 > - ¿Cuál de todos los experimentos es el más dañino?
+>>>
+>- - El de faulty porque se matan los datos.
+>>>
 
 ## Modelo de Base de Datos
 
