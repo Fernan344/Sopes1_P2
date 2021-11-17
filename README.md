@@ -102,8 +102,25 @@ Con Google Pub / Sub, una vez que se lee un mensaje de una suscripción y se ACK
 > - - debido a que están diseñados para diferentes propósitos, las capacidades mejoradas de Redis aumentan significativamente las capacidades de MongoDB, ya que MongoDB es una base de datos basada en disco y orientada a documentos optimizada para la simplicidad operativa, mientras que Redis es un almacén de estructura de datos persistente en memoria que permite realizar operaciones comunes con una complejidad mínima y un rendimiento máximo.
 
 # Manual de Usuario
+>- Página principal, contiene todos los apartados de cada una de las funciones requeridas
+> ![image](https://user-images.githubusercontent.com/36779113/142086007-46b910f8-9f00-4e02-8493-328a8ce06b10.png)
+>- Tabla de valores de la DB, contiene los Registros, jugadores y juegos	Jugados
+> ![image](https://user-images.githubusercontent.com/36779113/142086168-99e44e9e-f5fb-4593-9a5f-b3cebfb00b16.png)
 
-# Manual de Usuario
+>- Últimos 10 juegos, contiene los últimos 10 juegos que fueron jugados
+> ![image](https://user-images.githubusercontent.com/36779113/142086231-1b477a61-82ba-4d30-9c13-d73d73e24196.png)
+
+>- Gráfica del top 3 de juegos, los tres juegos más jugados
+> ![image](https://user-images.githubusercontent.com/36779113/142086309-b29b2813-e335-428c-9251-40896596eaf1.png)
+
+>- Estadísticas en tiempo real del jugador, contiene al Jugador y	Juegos Ganados por cada viewer
+> ![image](https://user-images.githubusercontent.com/36779113/142086436-db74d00f-6a2c-47cf-b03e-1cc1bbd5f7db.png)
+
+>- Tabla con los logs almacenados
+> ![image](https://user-images.githubusercontent.com/36779113/142086514-b6aa8f0a-f886-474e-9879-f17d581f3bc0.png)
+
+>- Filtros por datos del jugador
+> ![image](https://user-images.githubusercontent.com/36779113/142086553-ce0d3988-e274-4cc7-98b4-8bb8b1cec2d5.png)
 
 ### Utilización de Grafana
 > - Para la utilización de Grafana se encuentra implementado en Linkerd por lo que al momento de levantar Linkerd entre sus funciones y pods se encuentra Grafana para cada uno de estos.
